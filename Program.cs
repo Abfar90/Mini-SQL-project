@@ -1,10 +1,14 @@
-﻿namespace Project_Timesheet_Report
+﻿using Project_Timesheet_Report.UI;
+
+namespace Project_Timesheet_Report
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Menu menu = new Menu();
+
+            menu.AppMenu();
         }
     }
 }

@@ -10,4 +10,9 @@ public partial class Person
     public string Name { get; set; } = null!;
 
     public virtual ICollection<TimeSheet> TimeSheets { get; } = new List<TimeSheet>();
+
+    public Person(string name)
+    {
+        Name = name;
+    }
 }
