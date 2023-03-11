@@ -233,8 +233,8 @@ namespace Project_Timesheet_Report.UI
                                 Console.WriteLine("Enter updated name");
                                 string newP = Console.ReadLine();
                                 Person personUpdated = new Person(newP);
-                                DataAccess access2 = new DataAccess();
-                                access2.updateUser(personUpdated, personOriginal);
+                                
+                                access.updateUser(personUpdated, personOriginal);
 
                             }
                             break;
