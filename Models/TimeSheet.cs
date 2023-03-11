@@ -17,10 +17,11 @@ public partial class TimeSheet
 
     public virtual Project Project { get; set; } = null!;
 
-    public TimeSheet(int hours, int personId, int projectId)
+    public TimeSheet(int hours, int projectId, int personId)
     {
         Hours = hours;
-        PersonId = personId;
         ProjectId = projectId;
+        PersonId = personId;
+        
     }
 }
