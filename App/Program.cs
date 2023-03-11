@@ -1,6 +1,6 @@
 ﻿using Project_Timesheet_Report.UI;
 
-namespace Project_Timesheet_Report
+namespace Project_Timesheet_Report.App
 {
     internal class Program
     {

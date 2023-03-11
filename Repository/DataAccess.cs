@@ -7,6 +7,7 @@ using Project_Timesheet_Report.Models;
 
 namespace Project_Timesheet_Report.Repository
 {
+    //All direct calls to the DB are made within this class.
     public class DataAccess
     {
         private TimesheetDbContext _connection;
@@ -30,6 +31,8 @@ namespace Project_Timesheet_Report.Repository
             return newProject;
         }
 
+        //The method for registering time for a project. Contains a condition that hinders duplicates in the table.
+        //If time has previously been reported on a project for a user, the previous entry gets updated with the new hours.
         public void RegisterTime(TimeSheet entry)
         {
             bool duplicateEntrySearch = false;
@@ -58,11 +61,8 @@ namespace Project_Timesheet_Report.Repository
             return _connection.Projects.SingleOrDefault(p => p.Name == name);
         }
 
-        //public TimeSheet getTimeSheet(TimeSheet timeSheet)
-        //{
-        //    return _connection.TimeSheets.SingleOrDefault(t => t.ProjectId == timeSheet.ProjectId && t.PersonId == timeSheet.PersonId);
-        //}
-
+        //For the presentation of timesheets of chosen user. Used a JOIN to get the name of the project and amount of hours in the same table.
+        //Also created a TimesheetProject class to avoid returning the data as anonymous.
         public List<TimeSheetProject> PresentTimeSheets(int id)
         {
             var select = _connection.TimeSheets.Where(p => p.PersonId == id).ToList();

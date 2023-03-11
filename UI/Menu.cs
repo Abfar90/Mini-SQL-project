@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using Project_Timesheet_Report.Models;
@@ -16,7 +17,7 @@ namespace Project_Timesheet_Report.UI
         public void AppMenu()
         {
             Console.Clear();
-
+            //Menu function below, allows changing option by up and down arrows.
             List<string> main_Menu = new List<string>()
             {
                     "Create user or project",
@@ -32,6 +33,7 @@ namespace Project_Timesheet_Report.UI
 
             bool showMenu = true;
 
+            
             while (showMenu)
             {
 
@@ -115,6 +117,7 @@ namespace Project_Timesheet_Report.UI
                     switch (x)
                     {
                         case 0:
+                            //Below is the function for creating new users or projects.
                             Console.WriteLine("Would you like to create new user or project (enter U for user an P for project)");
                             string choice = Console.ReadLine();
 
@@ -138,12 +141,13 @@ namespace Project_Timesheet_Report.UI
                             break;
 
                         case 1:
+                            //Below is the function for viewing the reported time on each project for a chosen user.
                             Console.WriteLine("Which users timesheet would you like to view?");
                             string view = Console.ReadLine();
                             var showTable = new Table();
                             var user = access.getPerson(view);
                             var results = access.PresentTimeSheets(user.Id);
-                            //var project = access1.getProject();
+                            
                             showTable.Border = TableBorder.HeavyHead;
                             showTable.AddColumn("Project");
                             showTable.AddColumn(new TableColumn("Hours").Centered());
@@ -154,9 +158,11 @@ namespace Project_Timesheet_Report.UI
                             }
                             AnsiConsole.Write(showTable);
                             Console.ReadKey();
+                            Console.Clear();
                             break;
 
                         case 2:
+                            //Below is the function for reporting time on a project.
                             Console.WriteLine("For which user would you like to report");
                             string userToReport = Console.ReadLine();
 
@@ -171,10 +177,12 @@ namespace Project_Timesheet_Report.UI
                             TimeSheet report = new TimeSheet(hoursReported, projectReport.Id, userReport.Id);
 
                             access.RegisterTime(report);
-
+                            Console.ReadKey();
+                            Console.Clear();
                             break;
 
                         case 3:
+                            //Editing the reported time on a project or the name of a project/person.
                             Console.WriteLine("What would you like to edit: 1) Reported time on project, 2) project name, 3) Username");
                             int up = int.Parse(Console.ReadLine());
 
@@ -237,6 +245,13 @@ namespace Project_Timesheet_Report.UI
                                 access.updateUser(personUpdated, personOriginal);
 
                             }
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+
+                        case 4:
+                            //Exit project
+                            Environment.Exit(0);
                             break;
 
                     }
